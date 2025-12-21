@@ -1,10 +1,18 @@
 import { createBrowserRouter } from "react-router";
 import "./App.css";
-import AppLayout from "./AppLayout/AppLayout";
-import HomePage from "./pages/HomePage/HomePage";
-import PlaylistDetailPage from "./pages/PlaylistDetailPage/PlaylistDetailPage";
-import SearchPage from "./pages/SearchPage/SearchPage";
-import SearchWithKeywordPage from "./pages/SearchWithKeywordPage/SearchWithKeywordPage";
+import "bootstrap/dist/css/bootstrap.min.css";
+import React, { Suspense } from "react";
+import LoadingSpinner from "./common/components/LoadingSpinner";
+
+const AppLayout = React.lazy(() => import("./layout/AppLayout"));
+const HomePage = React.lazy(() => import("./pages/HomePage/HomePage"));
+const SearchPage = React.lazy(() => import("./pages/SearchPage/SearchPage"));
+const SearchWithKeywordPage = React.lazy(
+  () => import("./pages/SearchWithKeywordPage/SearchWithKeywordPage")
+);
+const PlaylistDetailPage = React.lazy(
+  () => import("./pages/PlaylistDetailPage/PlaylistDetailPage")
+);
 /* 
 1. 홈페이지(/) + 네비바
 2. 검색페이지(/search)
@@ -15,13 +23,17 @@ import SearchWithKeywordPage from "./pages/SearchWithKeywordPage/SearchWithKeywo
 export const router = createBrowserRouter([
   {
     path: "/",
-    Component: AppLayout,
+    element: (
+      <Suspense fallback={<LoadingSpinner />}>
+        <AppLayout />
+      </Suspense>
+    ),
     children: [
-      { index: true, Component: HomePage },
-      { path: "search", Component: SearchPage },
-      { path: "search/:keyword", Component: SearchWithKeywordPage },
-      { path: "playlist/:id", Component: PlaylistDetailPage },
-      // { path: "playlist/", Component: PlayListPage },
+      { index: true, element: <HomePage /> },
+      { path: "search", element: <SearchPage /> },
+      { path: "search/:keyword", element: <SearchWithKeywordPage /> },
+      { path: "playlist/:id", element: <PlaylistDetailPage /> },
+      // { path: "playlist/", element: <PlayListPage/> },
     ],
   },
 ]);
