@@ -6,7 +6,6 @@ import { NavLink, Outlet } from "react-router";
 import LoadingSpinner from "../common/components/LoadingSpinner";
 
 import LibraryHeader from "../common/components/LibraryHeader";
-import EmptyPlaylist from "../common/components/EmptyPlaylist";
 import Library from "../common/components/Library";
 const Layout = styled("div")({
   display: "flex",

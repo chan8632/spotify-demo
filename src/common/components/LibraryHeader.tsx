@@ -1,6 +1,5 @@
-import React from "react";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
-import { Box, Button, styled, Typography } from "@mui/material";
+import { Button, styled, Typography } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 const Head = styled("div")({
   display: "flex",
