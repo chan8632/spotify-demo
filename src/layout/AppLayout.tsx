@@ -5,8 +5,10 @@ import { Suspense } from "react";
 import { NavLink, Outlet } from "react-router";
 import LoadingSpinner from "../common/components/LoadingSpinner";
 
-import LibraryHeader from "../common/components/LibraryHeader";
-import Library from "../common/components/Library";
+import LibraryHeader from "./components/LibraryHeader";
+import Library from "./components/Library";
+import Navbar from "./components/Navbar";
+
 const Layout = styled("div")({
   display: "flex",
   height: "100vh",
@@ -76,7 +78,10 @@ const AppLayout = () => {
       </Sidebar>
 
       <Suspense fallback={<LoadingSpinner />}>
-        <Outlet />
+        <ContentBox>
+          <Navbar />
+          <Outlet />
+        </ContentBox>
       </Suspense>
     </Layout>
   );

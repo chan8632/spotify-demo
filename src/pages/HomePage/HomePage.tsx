@@ -1,5 +1,11 @@
+import NewReleases from "./components/NewReleases";
+
 const HomePage = () => {
-  return <div>Homepage</div>;
+  return (
+    <div>
+      <NewReleases />
+    </div>
+  );
 };
 
 export default HomePage;
