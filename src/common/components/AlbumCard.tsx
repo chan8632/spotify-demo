@@ -1,4 +1,4 @@
-import { Box, styled, Typography } from "@mui/material";
+import { styled, Typography } from "@mui/material";
 import theme from "../../../theme";
 import PlayButton from "./PlayButton";
 interface AlbumCardProp {
@@ -8,53 +8,54 @@ interface AlbumCardProp {
 }
 
 const AlbumCardContainer = styled("div")(({ theme }) => ({
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "center",
-  alignItems: "center",
+  minWidth: "160px",
+  width: "100%",
+  height: "100%",
+  padding: "12px",
   borderRadius: "8px",
-  padding: "8px 0",
   "&:hover": {
     backgroundColor: theme.palette.action.hover,
-    borderRadius: "8px",
-    padding: "8px 0",
-    "& .play-button": {
-      backgroundColor: "#1ed760",
-      opacity: 1,
-    },
+    transform: "translate3d(0px, 0px, 0px)",
+    transition: "opacity 0.3s ease-in-out",
+  },
+  "&:hover .overlay": {
+    opacity: 1,
   },
 }));
 
+const AlbumImage = styled("img")({
+  width: "100%",
+  height: "auto",
+  borderRadius: "8px",
+  marginBottom: "8px",
+});
+const EllipsisTypography = styled(Typography)({
+  whiteSpace: "nowrap",
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+});
+const Overlay = styled("div")({
+  position: "absolute",
+  bottom: "20px",
+  right: "8px",
+  opacity: 0,
+  transform: "translate3d(0px, 0px, 0px)",
+  transition: "opacity 0.3s ease-in-out",
+});
 const AlbumCard = ({ image, title, artistName }: AlbumCardProp) => {
   return (
     <AlbumCardContainer>
-      <Box>
-        <Box
-          sx={{
-            backgroundImage: `url(${image})`,
-            width: "144px",
-            height: "144px",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            borderRadius: "8px",
-            marginBottom: "15px",
-            position: "relative",
-          }}
-        >
-          <Box
-            sx={{
-              width: "50px",
-            }}
-          >
-            <PlayButton />
-          </Box>
-        </Box>
-      </Box>
+      <div style={{ position: "relative" }}>
+        <AlbumImage src={image} />
+        <Overlay className="overlay">
+          <PlayButton />
+        </Overlay>
+      </div>
 
-      <Typography variant="h2">{title}</Typography>
-      <Typography variant="body1" color={theme.palette.text.secondary}>
+      <EllipsisTypography variant="h2">{title}</EllipsisTypography>
+      <EllipsisTypography variant="body1" color={theme.palette.text.secondary}>
         {artistName}
-      </Typography>
+      </EllipsisTypography>
     </AlbumCardContainer>
   );
 };
