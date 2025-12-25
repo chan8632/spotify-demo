@@ -4,7 +4,6 @@ import { useClientCredentialToken } from "./useClientCredentialToken";
 
 export default function useGetNewRelease() {
   const clientCredentialsToken = useClientCredentialToken();
-  console.log("ttt", clientCredentialsToken);
   return useQuery({
     queryKey: ["newRelease"],
     queryFn: () => {
@@ -14,5 +13,6 @@ export default function useGetNewRelease() {
       const data = getNewRelease(clientCredentialsToken);
       return data;
     },
+    enabled: !!clientCredentialsToken,
   });
 }

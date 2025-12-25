@@ -1,1 +1,1 @@
-export const SPOTIFY_BASE_URL = import.meta.env.SPOTIFY_BASE_URL;
+export const SPOTIFY_BASE_URL = import.meta.env.VITE_SPOTIFY_BASE_URL;
